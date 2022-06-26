@@ -20,6 +20,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -49,9 +50,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Tasks() {
-    val taskIds: List<TaskId>? = App.architecture.stateBy(key = Unit)
-
-    if (taskIds != null) {
+    val taskIds: List<TaskId>? by App.architecture.stateBy(key = Unit)
+    taskIds?.let { taskIds ->
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = rememberInsetsPaddingValues(
@@ -139,8 +139,8 @@ fun LazyItemScope.CreateTaskButton() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyItemScope.Task(taskId: TaskId) {
-    val title: TaskTitle? = App.architecture.stateBy(taskId)
-    val content: TaskContent? = App.architecture.stateBy(taskId)
+    val title: TaskTitle? by App.architecture.stateBy(taskId)
+    val content: TaskContent? by App.architecture.stateBy(taskId)
 
     Card(
         modifier = Modifier

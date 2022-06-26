@@ -1,9 +1,15 @@
 package epicarchitect.arch.android.app
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.reflect.KClass
 
 
@@ -71,7 +77,15 @@ inline fun <reified KEY, reified VALUE> FlowArchitecture.outputFlow(key: KEY): F
 }
 
 @Composable
-inline fun <reified KEY : Any?, reified VALUE : Any?> FlowArchitecture.stateBy(key: KEY, initial: VALUE? = null): VALUE? {
-    val state by outputFlow<KEY, VALUE>(key).collectAsState(initial = initial)
-    return state
+inline fun <reified KEY : Any?, reified VALUE : Any?> FlowArchitecture.stateBy(key: KEY)
+    = outputFlow<KEY, VALUE>(key).collectAsState(initial = null)
+
+@Composable
+fun <T : Any?> Flow<T>.collectAsState2(
+    context: CoroutineContext = EmptyCoroutineContext
+): State<T?> = produceState<T?>(null, this, context) {
+    withContext(context) {
+        collect { value = it }
+    }
 }
+
