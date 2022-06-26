@@ -1,4 +1,4 @@
-package epicarchirect.arch.console.architecture
+package epicarchitect.arch.console.architecture
 
 class IoDrivenArchitectureBuilder(
     val outputProviders: MutableCollection<IoDrivenArchitecture.OutputProvider<*, *>> = mutableListOf(),

@@ -1,8 +1,8 @@
-package epicarchirect.arch.console.io
+package epicarchitect.arch.console.io
 
-import epicarchirect.arch.console.architecture.IoDrivenArchitecture
-import epicarchirect.arch.console.io.data.TaskContent
-import epicarchirect.arch.console.io.data.TaskId
+import epicarchitect.arch.console.architecture.IoDrivenArchitecture
+import epicarchitect.arch.io.TaskContent
+import epicarchitect.arch.io.TaskId
 
 class TaskContentProvider(
     private val tasksRepository: TasksRepository

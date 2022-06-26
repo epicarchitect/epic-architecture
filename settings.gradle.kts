@@ -8,4 +8,4 @@ dependencyResolutionManagement {
 
 include(":android:app")
 include(":desktop:app")
-include(":multiplatform")
+include(":domain")

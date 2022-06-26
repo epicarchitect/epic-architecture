@@ -1,7 +1,7 @@
-package epicarchirect.arch.console.io
+package epicarchitect.arch.console.io
 
-import epicarchirect.arch.console.architecture.IoDrivenArchitecture
-import epicarchirect.arch.console.io.data.CreateNewTask
+import epicarchitect.arch.console.architecture.IoDrivenArchitecture
+import epicarchitect.arch.io.CreateNewTask
 
 class CreateTaskProvider(
     private val tasksRepository: TasksRepository

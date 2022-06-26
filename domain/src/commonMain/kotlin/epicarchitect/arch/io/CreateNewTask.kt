@@ -1,4 +1,4 @@
-package epicarchirect.arch.console.io.data
+package epicarchitect.arch.io
 
 data class CreateNewTask(
     val title: TaskTitle,

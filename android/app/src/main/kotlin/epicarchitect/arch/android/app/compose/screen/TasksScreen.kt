@@ -32,11 +32,14 @@ import epicarchitect.arch.android.app.App
 import epicarchitect.arch.android.app.R
 import epicarchitect.arch.android.app.architecture.input
 import epicarchitect.arch.android.app.architecture.outputAsStateBy
-import epicarchitect.arch.android.app.io.data.CreateNewTask
-import epicarchitect.arch.android.app.io.data.DeleteTask
-import epicarchitect.arch.android.app.io.data.TaskContent
-import epicarchitect.arch.android.app.io.data.TaskId
-import epicarchitect.arch.android.app.io.data.TaskTitle
+import epicarchitect.arch.android.app.io.TaskContentWrapper
+import epicarchitect.arch.android.app.io.TaskTitleWrapper
+import epicarchitect.arch.android.app.io.impl
+import epicarchitect.arch.io.CreateNewTask
+import epicarchitect.arch.io.DeleteTask
+import epicarchitect.arch.io.TaskContent
+import epicarchitect.arch.io.TaskId
+import epicarchitect.arch.io.TaskTitle
 
 @Composable
 fun TasksScreen() {
@@ -62,7 +65,7 @@ fun TasksScreen() {
                 CreateTaskButton()
             }
 
-            items(taskIds, key = { it.id }) {
+            items(taskIds, key = { it.impl() }) {
                 Task(it)
             }
 
@@ -115,8 +118,8 @@ fun LazyItemScope.CreateTaskButton() {
         onClick = {
             App.architecture.input(
                 CreateNewTask(
-                    title = TaskTitle("Item"),
-                    content = TaskContent("Content")
+                    title = TaskTitleWrapper("Item"),
+                    content = TaskContentWrapper("Content")
                 )
             )
         },
@@ -144,12 +147,12 @@ fun LazyItemScope.Task(taskId: TaskId) {
                 modifier = Modifier.padding(16.dp),
             ) {
                 Text(
-                    text = title?.title ?: "",
+                    text = title?.impl() ?: "",
                     style = MaterialTheme.typography.h6
                 )
 
                 Text(
-                    text = content?.content ?: "",
+                    text = content?.impl() ?: "",
                     style = MaterialTheme.typography.body1
                 )
             }
@@ -163,7 +166,7 @@ fun LazyItemScope.Task(taskId: TaskId) {
                 },
                 content = {
                     Text(
-                        text = "Delete item ${taskId.id}"
+                        text = "Delete item ${taskId.impl()}"
                     )
                 },
             )

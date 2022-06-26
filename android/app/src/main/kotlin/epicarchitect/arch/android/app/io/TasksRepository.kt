@@ -1,9 +1,9 @@
 package epicarchitect.arch.android.app.io
 
-import epicarchitect.arch.android.app.io.data.Task
-import epicarchitect.arch.android.app.io.data.TaskContent
-import epicarchitect.arch.android.app.io.data.TaskId
-import epicarchitect.arch.android.app.io.data.TaskTitle
+import epicarchitect.arch.io.Task
+import epicarchitect.arch.io.TaskContent
+import epicarchitect.arch.io.TaskId
+import epicarchitect.arch.io.TaskTitle
 import kotlinx.coroutines.flow.Flow
 
 interface TasksRepository {

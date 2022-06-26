@@ -1,7 +1,7 @@
 package epicarchitect.arch.android.app.io
 
 import epicarchitect.arch.android.app.architecture.FlowDrivenArchitecture
-import epicarchitect.arch.android.app.io.data.DeleteTask
+import epicarchitect.arch.io.DeleteTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

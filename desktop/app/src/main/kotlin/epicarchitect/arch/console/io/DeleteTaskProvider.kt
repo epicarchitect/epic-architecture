@@ -1,7 +1,7 @@
-package epicarchirect.arch.console.io
+package epicarchitect.arch.console.io
 
-import epicarchirect.arch.console.architecture.IoDrivenArchitecture
-import epicarchirect.arch.console.io.data.DeleteTask
+import epicarchitect.arch.console.architecture.IoDrivenArchitecture
+import epicarchitect.arch.io.DeleteTask
 
 class DeleteTaskProvider(
     private val tasksRepository: TasksRepository

@@ -1,10 +1,14 @@
 package epicarchitect.arch.android.app.repository
 
-import epicarchitect.arch.android.app.io.data.Task
-import epicarchitect.arch.android.app.io.data.TaskContent
-import epicarchitect.arch.android.app.io.data.TaskId
-import epicarchitect.arch.android.app.io.data.TaskTitle
+import epicarchitect.arch.android.app.io.TaskContentWrapper
+import epicarchitect.arch.android.app.io.TaskIdWrapper
+import epicarchitect.arch.android.app.io.TaskTitleWrapper
 import epicarchitect.arch.android.app.io.TasksRepository
+import epicarchitect.arch.android.app.io.impl
+import epicarchitect.arch.io.Task
+import epicarchitect.arch.io.TaskContent
+import epicarchitect.arch.io.TaskId
+import epicarchitect.arch.io.TaskTitle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -18,19 +22,19 @@ class FakeTasksRepository : TasksRepository {
     override suspend fun insert(title: TaskTitle, content: TaskContent) {
         lastId++
         tasks.value += Task(
-            id = TaskId(lastId),
-            title = TaskTitle("${title.title} $lastId"),
-            content = TaskContent("${content.content} $lastId")
+            id = TaskIdWrapper(lastId),
+            title = TaskTitleWrapper("${title.impl()} $lastId"),
+            content = TaskContentWrapper("${content.impl()} $lastId")
         )
     }
 
     override suspend fun delete(taskId: TaskId) {
-        tasks.update { it.filter { it.id.id != taskId.id } }
+        tasks.update { it.filter { it.id != taskId } }
     }
 
     override fun tasksFlow(): Flow<List<Task>> = tasks
 
     override fun taskFlow(taskId: TaskId) = tasks.map {
-        it.find { it.id.id == taskId.id }
+        it.find { it.id == taskId }
     }
 }

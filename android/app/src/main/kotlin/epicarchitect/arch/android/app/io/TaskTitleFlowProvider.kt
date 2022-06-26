@@ -1,8 +1,8 @@
 package epicarchitect.arch.android.app.io
 
 import epicarchitect.arch.android.app.architecture.FlowDrivenArchitecture
-import epicarchitect.arch.android.app.io.data.TaskId
-import epicarchitect.arch.android.app.io.data.TaskTitle
+import epicarchitect.arch.io.TaskId
+import epicarchitect.arch.io.TaskTitle
 import kotlinx.coroutines.flow.map
 
 class TaskTitleFlowProvider(

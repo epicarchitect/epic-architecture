@@ -1,7 +1,7 @@
 package epicarchitect.arch.android.app.io
 
 import epicarchitect.arch.android.app.architecture.FlowDrivenArchitecture
-import epicarchitect.arch.android.app.io.data.CreateNewTask
+import epicarchitect.arch.io.CreateNewTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

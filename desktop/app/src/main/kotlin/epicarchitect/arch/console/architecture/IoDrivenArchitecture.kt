@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package epicarchirect.arch.console.architecture
+package epicarchitect.arch.console.architecture
 
 import kotlin.reflect.KClass
 
