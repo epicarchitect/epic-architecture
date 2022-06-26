@@ -4,6 +4,7 @@ import epicarchitect.arch.android.app.data.Task
 import epicarchitect.arch.android.app.data.TaskContent
 import epicarchitect.arch.android.app.data.TaskId
 import epicarchitect.arch.android.app.data.TaskTitle
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
@@ -26,13 +27,9 @@ class TaskRepository {
         tasks.update { it.filter { it.id.id != taskId.id } }
     }
 
-    fun taskIds() = tasks.map { it.map { it.id } }
+    fun tasksFlow(): Flow<List<Task>> = tasks
 
-    fun taskTitleFlow(taskId: TaskId) = taskFlow(taskId).map { it?.title }
-
-    fun taskContentFlow(taskId: TaskId) = taskFlow(taskId).map { it?.content }
-
-    private fun taskFlow(taskId: TaskId) = tasks.map {
+    fun taskFlow(taskId: TaskId) = tasks.map {
         it.find { it.id.id == taskId.id }
     }
 }
