@@ -1,4 +1,4 @@
-package epicarchitect.arch.android.app
+package epicarchitect.arch.android.app.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.ProvideWindowInsets
+import epicarchitect.arch.android.app.R
 
 @SuppressLint("ConflictingOnColor")
 @Composable

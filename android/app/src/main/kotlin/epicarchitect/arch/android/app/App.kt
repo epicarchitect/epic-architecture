@@ -1,26 +1,25 @@
 package epicarchitect.arch.android.app
 
 import android.app.Application
-import epicarchitect.arch.android.app.data.TaskContent
-import epicarchitect.arch.android.app.data.TaskId
-import epicarchitect.arch.android.app.data.TaskTitle
-import epicarchitect.arch.android.app.provider.TaskContentFlowProvider
-import epicarchitect.arch.android.app.provider.TaskIdsFlowProvider
-import epicarchitect.arch.android.app.provider.TaskTitleFlowProvider
-import epicarchitect.arch.android.app.repository.TaskRepository
+import epicarchitect.arch.android.app.architecture.FlowArchitecture
+import epicarchitect.arch.android.app.output.TaskContentFlowProvider
+import epicarchitect.arch.android.app.output.TaskIdsFlowProvider
+import epicarchitect.arch.android.app.output.TasksRepository
+import epicarchitect.arch.android.app.output.TaskTitleFlowProvider
+import epicarchitect.arch.android.app.repository.FakeTasksRepository
 
 
 class App : Application() {
     companion object {
-        val taskRepository by lazy {
-            TaskRepository()
+        val tasksRepository: TasksRepository by lazy {
+            FakeTasksRepository()
         }
 
         val architecture by lazy {
             FlowArchitecture {
-                output { TaskTitleFlowProvider(taskRepository) }
-                output { TaskContentFlowProvider(taskRepository) }
-                output { TaskIdsFlowProvider(taskRepository) }
+                output { TaskTitleFlowProvider(tasksRepository) }
+                output { TaskContentFlowProvider(tasksRepository) }
+                output { TaskIdsFlowProvider(tasksRepository) }
             }
         }
     }
