@@ -1,4 +1,4 @@
-package epicarchitect.arch.android.app.ui
+package epicarchitect.arch.android.app.compose.theme
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme

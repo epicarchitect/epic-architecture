@@ -1,8 +1,5 @@
-package epicarchitect.arch.android.app.ui
+package epicarchitect.arch.android.app.compose.screen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +18,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -33,28 +29,17 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import epicarchitect.arch.android.app.App
-import epicarchitect.arch.android.app.App.Companion.tasksRepository
 import epicarchitect.arch.android.app.R
+import epicarchitect.arch.android.app.architecture.input
 import epicarchitect.arch.android.app.architecture.stateBy
-import epicarchitect.arch.android.app.data.TaskContent
-import epicarchitect.arch.android.app.data.TaskId
-import epicarchitect.arch.android.app.data.TaskTitle
-import kotlinx.coroutines.launch
-
-class MainActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ArchTheme {
-                Tasks()
-            }
-        }
-    }
-}
+import epicarchitect.arch.android.app.io.TaskContent
+import epicarchitect.arch.android.app.io.TaskId
+import epicarchitect.arch.android.app.io.TaskTitle
+import epicarchitect.arch.android.app.io.CreateNewTask
+import epicarchitect.arch.android.app.io.DeleteTask
 
 @Composable
-fun Tasks() {
+fun TasksScreen() {
     val taskIds: List<TaskId>? by App.architecture.stateBy(key = Unit)
     taskIds?.let { taskIds ->
         LazyColumn(
@@ -123,18 +108,17 @@ fun LazyItemScope.Logo() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyItemScope.CreateTaskButton() {
-    val coroutineScope = rememberCoroutineScope()
     Button(
         modifier = Modifier
             .fillMaxWidth()
             .animateItemPlacement(),
         onClick = {
-            coroutineScope.launch {
-                tasksRepository.insert(
+            App.architecture.input(
+                CreateNewTask(
                     title = TaskTitle("Item"),
                     content = TaskContent("Content")
                 )
-            }
+            )
         },
         content = {
             Text(
@@ -147,7 +131,6 @@ fun LazyItemScope.CreateTaskButton() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyItemScope.Task(taskId: TaskId) {
-    val coroutineScope = rememberCoroutineScope()
     val title: TaskTitle? by App.architecture.stateBy(taskId)
     val content: TaskContent? by App.architecture.stateBy(taskId)
 
@@ -176,9 +159,7 @@ fun LazyItemScope.Task(taskId: TaskId) {
                     .padding(end = 12.dp, bottom = 8.dp)
                     .align(Alignment.BottomEnd),
                 onClick = {
-                    coroutineScope.launch {
-                        tasksRepository.delete(taskId)
-                    }
+                    App.architecture.input(DeleteTask(taskId))
                 },
                 content = {
                     Text(

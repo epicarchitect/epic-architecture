@@ -2,16 +2,23 @@ package epicarchitect.arch.android.app
 
 import android.app.Application
 import epicarchitect.arch.android.app.architecture.FlowArchitecture
-import epicarchitect.arch.android.app.output.TaskContentFlowProvider
-import epicarchitect.arch.android.app.output.TaskIdsFlowProvider
-import epicarchitect.arch.android.app.output.TasksRepository
-import epicarchitect.arch.android.app.output.TaskTitleFlowProvider
+import epicarchitect.arch.android.app.io.CreateTaskProvider
+import epicarchitect.arch.android.app.io.DeleteTaskProvider
+import epicarchitect.arch.android.app.io.TaskContentFlowProvider
+import epicarchitect.arch.android.app.io.TaskIdsFlowProvider
+import epicarchitect.arch.android.app.io.TaskTitleFlowProvider
+import epicarchitect.arch.android.app.io.TasksRepository
 import epicarchitect.arch.android.app.repository.FakeTasksRepository
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 class App : Application() {
     companion object {
-        val tasksRepository: TasksRepository by lazy {
+        private val coroutineScope by lazy {
+            CoroutineScope(Dispatchers.IO)
+        }
+
+        private val tasksRepository: TasksRepository by lazy {
             FakeTasksRepository()
         }
 
@@ -20,6 +27,8 @@ class App : Application() {
                 output { TaskTitleFlowProvider(tasksRepository) }
                 output { TaskContentFlowProvider(tasksRepository) }
                 output { TaskIdsFlowProvider(tasksRepository) }
+                input { CreateTaskProvider(tasksRepository, coroutineScope) }
+                input { DeleteTaskProvider(tasksRepository, coroutineScope) }
             }
         }
     }
