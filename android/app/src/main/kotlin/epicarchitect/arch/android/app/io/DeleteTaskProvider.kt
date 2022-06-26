@@ -1,13 +1,14 @@
 package epicarchitect.arch.android.app.io
 
-import epicarchitect.arch.android.app.architecture.FlowArchitecture
+import epicarchitect.arch.android.app.architecture.FlowDrivenArchitecture
+import epicarchitect.arch.android.app.io.data.DeleteTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class DeleteTaskProvider(
     private val tasksRepository: TasksRepository,
     private val coroutineScope: CoroutineScope
-) : FlowArchitecture.InputProvider<DeleteTask> {
+) : FlowDrivenArchitecture.InputProvider<DeleteTask> {
 
     override fun provide(value: DeleteTask) {
         coroutineScope.launch {
@@ -15,5 +16,3 @@ class DeleteTaskProvider(
         }
     }
 }
-
-data class DeleteTask(val taskId: TaskId)

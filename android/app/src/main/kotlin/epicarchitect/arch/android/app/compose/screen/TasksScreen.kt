@@ -31,16 +31,16 @@ import com.google.accompanist.insets.rememberInsetsPaddingValues
 import epicarchitect.arch.android.app.App
 import epicarchitect.arch.android.app.R
 import epicarchitect.arch.android.app.architecture.input
-import epicarchitect.arch.android.app.architecture.stateBy
-import epicarchitect.arch.android.app.io.TaskContent
-import epicarchitect.arch.android.app.io.TaskId
-import epicarchitect.arch.android.app.io.TaskTitle
-import epicarchitect.arch.android.app.io.CreateNewTask
-import epicarchitect.arch.android.app.io.DeleteTask
+import epicarchitect.arch.android.app.architecture.outputAsStateBy
+import epicarchitect.arch.android.app.io.data.CreateNewTask
+import epicarchitect.arch.android.app.io.data.DeleteTask
+import epicarchitect.arch.android.app.io.data.TaskContent
+import epicarchitect.arch.android.app.io.data.TaskId
+import epicarchitect.arch.android.app.io.data.TaskTitle
 
 @Composable
 fun TasksScreen() {
-    val taskIds: List<TaskId>? by App.architecture.stateBy(key = Unit)
+    val taskIds: List<TaskId>? by App.architecture.outputAsStateBy(key = Unit)
     taskIds?.let { taskIds ->
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -131,8 +131,8 @@ fun LazyItemScope.CreateTaskButton() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyItemScope.Task(taskId: TaskId) {
-    val title: TaskTitle? by App.architecture.stateBy(taskId)
-    val content: TaskContent? by App.architecture.stateBy(taskId)
+    val title: TaskTitle? by App.architecture.outputAsStateBy(taskId)
+    val content: TaskContent? by App.architecture.outputAsStateBy(taskId)
 
     Card(
         modifier = Modifier

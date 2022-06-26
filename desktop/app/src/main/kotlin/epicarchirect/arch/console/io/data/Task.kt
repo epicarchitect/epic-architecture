@@ -1,4 +1,4 @@
-package epicarchitect.arch.android.app.io
+package epicarchirect.arch.console.io.data
 
 data class Task(
     val id: TaskId,

@@ -1,18 +1,18 @@
 package epicarchitect.arch.android.app.architecture
 
 class FlowArchitectureBuilder(
-    val outputProviders: MutableCollection<FlowArchitecture.OutputProvider<*, *>> = mutableListOf(),
-    val outputProviderConfigs: MutableCollection<FlowArchitecture.OutputProviderConfig> = mutableListOf(),
-    val inputProviders: MutableCollection<FlowArchitecture.InputProvider<*>> = mutableListOf(),
-    val inputProviderConfigs: MutableCollection<FlowArchitecture.InputProviderConfig> = mutableListOf()
+    val outputProviders: MutableCollection<FlowDrivenArchitecture.OutputProvider<*, *>> = mutableListOf(),
+    val outputProviderConfigs: MutableCollection<FlowDrivenArchitecture.OutputProviderConfig> = mutableListOf(),
+    val inputProviders: MutableCollection<FlowDrivenArchitecture.InputProvider<*>> = mutableListOf(),
+    val inputProviderConfigs: MutableCollection<FlowDrivenArchitecture.InputProviderConfig> = mutableListOf()
 ) {
 
-    inline fun <reified KEY : Any?, reified VALUE : Any?, reified PROVIDER : FlowArchitecture.OutputProvider<KEY, VALUE>> output(
+    inline fun <reified KEY : Any?, reified VALUE : Any?, reified PROVIDER : FlowDrivenArchitecture.OutputProvider<KEY, VALUE>> output(
         providerFactory: () -> PROVIDER
     ) {
         outputProviders.add(providerFactory())
         outputProviderConfigs.add(
-            FlowArchitecture.OutputProviderConfig(
+            FlowDrivenArchitecture.OutputProviderConfig(
                 KEY::class,
                 VALUE::class,
                 PROVIDER::class
@@ -21,19 +21,19 @@ class FlowArchitectureBuilder(
     }
 
 
-    inline fun <reified VALUE : Any?, reified PROVIDER : FlowArchitecture.InputProvider<VALUE>> input(
+    inline fun <reified VALUE : Any?, reified PROVIDER : FlowDrivenArchitecture.InputProvider<VALUE>> input(
         providerFactory: () -> PROVIDER
     ) {
         inputProviders.add(providerFactory())
         inputProviderConfigs.add(
-            FlowArchitecture.InputProviderConfig(
+            FlowDrivenArchitecture.InputProviderConfig(
                 VALUE::class,
                 PROVIDER::class
             )
         )
     }
 
-    fun build() = FlowArchitecture(
+    fun build() = FlowDrivenArchitecture(
         outputProviders,
         inputProviders,
         outputProviderConfigs,
@@ -41,4 +41,4 @@ class FlowArchitectureBuilder(
     )
 }
 
-fun FlowArchitecture(setup: FlowArchitectureBuilder.() -> Unit) = FlowArchitectureBuilder().apply(setup).build()
+fun FlowDrivenArchitecture(setup: FlowArchitectureBuilder.() -> Unit) = FlowArchitectureBuilder().apply(setup).build()

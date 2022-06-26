@@ -1,7 +1,7 @@
 package epicarchitect.arch.android.app
 
 import android.app.Application
-import epicarchitect.arch.android.app.architecture.FlowArchitecture
+import epicarchitect.arch.android.app.architecture.FlowDrivenArchitecture
 import epicarchitect.arch.android.app.io.CreateTaskProvider
 import epicarchitect.arch.android.app.io.DeleteTaskProvider
 import epicarchitect.arch.android.app.io.TaskContentFlowProvider
@@ -23,7 +23,7 @@ class App : Application() {
         }
 
         val architecture by lazy {
-            FlowArchitecture {
+            FlowDrivenArchitecture {
                 output { TaskTitleFlowProvider(tasksRepository) }
                 output { TaskContentFlowProvider(tasksRepository) }
                 output { TaskIdsFlowProvider(tasksRepository) }

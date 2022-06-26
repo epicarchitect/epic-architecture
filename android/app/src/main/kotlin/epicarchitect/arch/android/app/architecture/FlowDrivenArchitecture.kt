@@ -5,7 +5,7 @@ package epicarchitect.arch.android.app.architecture
 import kotlinx.coroutines.flow.Flow
 import kotlin.reflect.KClass
 
-class FlowArchitecture(
+class FlowDrivenArchitecture(
     private val outputProviders: Collection<OutputProvider<*, *>>,
     private val inputProviders: Collection<InputProvider<*>>,
     private val outputProviderConfigs: Collection<OutputProviderConfig>,
@@ -58,15 +58,15 @@ class FlowArchitecture(
     }
 }
 
-inline fun <reified KEY, reified VALUE> FlowArchitecture.output(key: KEY): Flow<VALUE> {
+inline fun <reified KEY, reified VALUE> FlowDrivenArchitecture.output(key: KEY): Flow<VALUE> {
     val config = getOutputProviderConfig(KEY::class, VALUE::class)
-    val provider = getOutputProvider(config.providerClass) as FlowArchitecture.OutputProvider<KEY, VALUE>
+    val provider = getOutputProvider(config.providerClass) as FlowDrivenArchitecture.OutputProvider<KEY, VALUE>
     return provider.provide(key)
 }
 
-inline fun <reified VALUE> FlowArchitecture.input(value: VALUE) {
+inline fun <reified VALUE> FlowDrivenArchitecture.input(value: VALUE) {
     val config = getInputProviderConfig(VALUE::class)
-    val provider = getInputProvider(config.providerClass) as FlowArchitecture.InputProvider<VALUE>
+    val provider = getInputProvider(config.providerClass) as FlowDrivenArchitecture.InputProvider<VALUE>
     return provider.provide(value)
 }
 

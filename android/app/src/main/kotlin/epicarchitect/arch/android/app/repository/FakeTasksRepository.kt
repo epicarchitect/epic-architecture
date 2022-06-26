@@ -1,9 +1,9 @@
 package epicarchitect.arch.android.app.repository
 
-import epicarchitect.arch.android.app.io.Task
-import epicarchitect.arch.android.app.io.TaskContent
-import epicarchitect.arch.android.app.io.TaskId
-import epicarchitect.arch.android.app.io.TaskTitle
+import epicarchitect.arch.android.app.io.data.Task
+import epicarchitect.arch.android.app.io.data.TaskContent
+import epicarchitect.arch.android.app.io.data.TaskId
+import epicarchitect.arch.android.app.io.data.TaskTitle
 import epicarchitect.arch.android.app.io.TasksRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

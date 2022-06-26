@@ -4,6 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 
 @Composable
-inline fun <reified KEY : Any?, reified VALUE : Any?> FlowArchitecture.stateBy(
+inline fun <reified KEY : Any?, reified VALUE : Any?> FlowDrivenArchitecture.outputAsStateBy(
     key: KEY
 ) = output<KEY, VALUE>(key).collectAsState(initial = null)
