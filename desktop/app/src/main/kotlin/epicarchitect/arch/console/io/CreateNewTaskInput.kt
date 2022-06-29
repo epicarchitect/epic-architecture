@@ -1,13 +1,13 @@
 package epicarchitect.arch.console.io
 
-import epicarchitect.arch.console.architecture.IoDrivenArchitecture
+import epicarchitect.architecture.io.IoDrivenArchitecture
 import epicarchitect.arch.io.CreateNewTask
 
-class CreateTaskProvider(
+class CreateNewTaskInput(
     private val tasksRepository: TasksRepository
-) : IoDrivenArchitecture.InputProvider<CreateNewTask> {
+) : IoDrivenArchitecture.Input<CreateNewTask> {
 
-    override fun provide(value: CreateNewTask) {
+    override fun invoke(value: CreateNewTask) {
         tasksRepository.insert(
             value.title,
             value.content
