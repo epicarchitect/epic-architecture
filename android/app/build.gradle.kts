@@ -56,6 +56,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":flow-driven-architecture"))
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("androidx.compose.material:material:1.1.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")

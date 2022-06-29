@@ -9,3 +9,5 @@ dependencyResolutionManagement {
 include(":android:app")
 include(":desktop:app")
 include(":domain")
+include(":architecture-core")
+include(":flow-driven-architecture")

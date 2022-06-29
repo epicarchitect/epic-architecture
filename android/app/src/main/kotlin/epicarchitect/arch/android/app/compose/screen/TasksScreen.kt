@@ -30,7 +30,6 @@ import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import epicarchitect.arch.android.app.App
 import epicarchitect.arch.android.app.R
-import epicarchitect.arch.android.app.architecture.input
 import epicarchitect.arch.android.app.architecture.outputAsStateBy
 import epicarchitect.arch.android.app.io.TaskContentWrapper
 import epicarchitect.arch.android.app.io.TaskTitleWrapper
