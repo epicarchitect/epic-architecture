@@ -1,7 +1,7 @@
 package epicarchitect.arch.android.app
 
 import android.app.Application
-import epicarchitect.architecture.flow.FlowDrivenArchitecture
+import epicarchitect.architecture.FlowDrivenArchitecture
 import epicarchitect.arch.android.app.io.CreateNewTaskInput
 import epicarchitect.arch.android.app.io.DeleteTaskInput
 import epicarchitect.arch.android.app.io.TaskContentOutput

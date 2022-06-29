@@ -1,6 +1,5 @@
-package epicarchitect.architecture.flow
+package epicarchitect.architecture
 
-import epicarchitect.architecture.core.EpicArchitecture
 import kotlinx.coroutines.flow.Flow
 
 class FlowArchitectureBuilder {

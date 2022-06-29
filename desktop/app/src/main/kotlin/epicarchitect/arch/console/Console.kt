@@ -4,7 +4,7 @@ import epicarchitect.arch.console.io.TaskContentWrapper
 import epicarchitect.arch.console.io.TaskIdWrapper
 import epicarchitect.arch.console.io.TaskTitleWrapper
 import epicarchitect.arch.console.io.impl
-import epicarchitect.architecture.procedure.ProcedureDrivenArchitecture
+import epicarchitect.architecture.ProcedureDrivenArchitecture
 import epicarchitect.domain.TaskContent
 import epicarchitect.domain.TaskCreationParameters
 import epicarchitect.domain.TaskDeletionParameters

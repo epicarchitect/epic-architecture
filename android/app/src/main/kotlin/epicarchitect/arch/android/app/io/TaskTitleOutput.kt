@@ -1,6 +1,6 @@
 package epicarchitect.arch.android.app.io
 
-import epicarchitect.architecture.flow.FlowDrivenArchitecture
+import epicarchitect.architecture.FlowDrivenArchitecture
 import epicarchitect.domain.TaskId
 import epicarchitect.domain.TaskTitle
 import kotlinx.coroutines.flow.map

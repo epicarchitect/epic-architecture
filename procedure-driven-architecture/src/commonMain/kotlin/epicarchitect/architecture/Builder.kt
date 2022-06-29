@@ -1,6 +1,4 @@
-package epicarchitect.architecture.procedure
-
-import epicarchitect.architecture.core.EpicArchitecture
+package epicarchitect.architecture
 
 class IoDrivenArchitectureBuilder {
     val outputs = mutableListOf<ProcedureDrivenArchitecture.Output<*, *>>()

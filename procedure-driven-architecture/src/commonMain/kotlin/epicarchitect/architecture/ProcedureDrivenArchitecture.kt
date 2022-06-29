@@ -1,8 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package epicarchitect.architecture.procedure
-
-import epicarchitect.architecture.core.EpicArchitecture
+package epicarchitect.architecture
 
 class ProcedureDrivenArchitecture(
     outputs: Iterable<Output<*, *>>,

@@ -1,4 +1,4 @@
-package epicarchitect.architecture.core
+package epicarchitect.architecture
 
 import kotlin.reflect.KClass
 
