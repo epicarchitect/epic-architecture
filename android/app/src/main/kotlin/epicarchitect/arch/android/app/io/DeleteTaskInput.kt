@@ -1,16 +1,16 @@
 package epicarchitect.arch.android.app.io
 
 import epicarchitect.architecture.flow.FlowDrivenArchitecture
-import epicarchitect.arch.io.DeleteTask
+import epicarchitect.domain.TaskDeletionParameters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class DeleteTaskInput(
     private val tasksRepository: TasksRepository,
     private val coroutineScope: CoroutineScope
-) : FlowDrivenArchitecture.Input<DeleteTask> {
+) : FlowDrivenArchitecture.Input<TaskDeletionParameters> {
 
-    override fun invoke(value: DeleteTask) {
+    override fun invoke(value: TaskDeletionParameters) {
         coroutineScope.launch {
             tasksRepository.delete(value.taskId)
         }

@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":io-driven-architecture"))
+    implementation(project(":procedure-driven-architecture"))
 }

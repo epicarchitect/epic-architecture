@@ -1,10 +1,10 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package epicarchitect.architecture.io
+package epicarchitect.architecture.procedure
 
 import epicarchitect.architecture.core.EpicArchitecture
 
-class IoDrivenArchitecture(
+class ProcedureDrivenArchitecture(
     outputs: Iterable<Output<*, *>>,
     inputs: Iterable<Input<*>>,
     outputConfigs: Iterable<OutputConfig>,

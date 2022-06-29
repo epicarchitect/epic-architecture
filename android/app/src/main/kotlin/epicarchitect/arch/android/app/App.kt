@@ -24,11 +24,11 @@ class App : Application() {
 
         val architecture by lazy {
             FlowDrivenArchitecture {
-                output { TaskTitleOutput(tasksRepository) }
-                output { TaskContentOutput(tasksRepository) }
-                output { TaskIdsOutput(tasksRepository) }
-                input { CreateNewTaskInput(tasksRepository, coroutineScope) }
-                input { DeleteTaskInput(tasksRepository, coroutineScope) }
+                output(TaskTitleOutput(tasksRepository))
+                output(TaskContentOutput(tasksRepository))
+                output(TaskIdsOutput(tasksRepository))
+                input(CreateNewTaskInput(tasksRepository, coroutineScope))
+                input(DeleteTaskInput(tasksRepository, coroutineScope))
             }
         }
     }

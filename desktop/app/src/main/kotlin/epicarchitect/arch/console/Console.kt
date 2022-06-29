@@ -1,31 +1,35 @@
 package epicarchitect.arch.console
 
-import epicarchitect.architecture.io.IoDrivenArchitecture
-import epicarchitect.arch.console.io.CreateNewTaskInput
-import epicarchitect.arch.console.io.DeleteTaskInput
-import epicarchitect.arch.console.io.TaskContentOutput
 import epicarchitect.arch.console.io.TaskContentWrapper
 import epicarchitect.arch.console.io.TaskIdWrapper
-import epicarchitect.arch.console.io.TaskIdsOutput
-import epicarchitect.arch.console.io.TaskTitleOutput
 import epicarchitect.arch.console.io.TaskTitleWrapper
 import epicarchitect.arch.console.io.impl
-import epicarchitect.arch.console.repository.FakeTasksRepository
-import epicarchitect.arch.io.CreateNewTask
-import epicarchitect.arch.io.DeleteTask
-import epicarchitect.arch.io.TaskContent
-import epicarchitect.arch.io.TaskId
-import epicarchitect.arch.io.TaskTitle
+import epicarchitect.architecture.procedure.ProcedureDrivenArchitecture
+import epicarchitect.domain.TaskContent
+import epicarchitect.domain.TaskCreationParameters
+import epicarchitect.domain.TaskDeletionParameters
+import epicarchitect.domain.TaskId
+import epicarchitect.domain.TaskTitle
 
 fun main() {
     val tasksRepository = FakeTasksRepository()
 
-    val architecture = IoDrivenArchitecture {
-        output { TaskIdsOutput(tasksRepository) }
-        output { TaskContentOutput(tasksRepository) }
-        output { TaskTitleOutput(tasksRepository) }
-        input { CreateNewTaskInput(tasksRepository) }
-        input { DeleteTaskInput(tasksRepository) }
+    val architecture = ProcedureDrivenArchitecture {
+        output { _: Unit ->
+            tasksRepository.getTasks().map { it.id }
+        }
+        output { key: TaskId ->
+            tasksRepository.getTask(key)?.content
+        }
+        output { key: TaskId ->
+            tasksRepository.getTask(key)?.title
+        }
+        input { parameters: TaskCreationParameters ->
+            tasksRepository.createTask(parameters)
+        }
+        input { parameters: TaskDeletionParameters ->
+            tasksRepository.delete(parameters)
+        }
     }
 
     while (true) {
@@ -37,7 +41,7 @@ fun main() {
             when (args[0]) {
                 "createTask" -> {
                     architecture.input(
-                        CreateNewTask(
+                        TaskCreationParameters(
                             title = TaskTitleWrapper(args[1]),
                             content = TaskContentWrapper(args[2])
                         )
@@ -45,7 +49,7 @@ fun main() {
                 }
                 "deleteTask" -> {
                     val taskId = TaskIdWrapper(args[1].toInt())
-                    architecture.input(DeleteTask(taskId))
+                    architecture.input(TaskDeletionParameters(taskId))
                 }
                 "getTaskContent" -> {
                     val taskId = TaskIdWrapper(args[1].toInt())

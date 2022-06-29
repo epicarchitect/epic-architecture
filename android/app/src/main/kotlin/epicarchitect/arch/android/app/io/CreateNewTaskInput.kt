@@ -1,16 +1,16 @@
 package epicarchitect.arch.android.app.io
 
+import epicarchitect.domain.TaskCreationParameters
 import epicarchitect.architecture.flow.FlowDrivenArchitecture
-import epicarchitect.arch.io.CreateNewTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class CreateNewTaskInput(
     private val tasksRepository: TasksRepository,
     private val coroutineScope: CoroutineScope
-) : FlowDrivenArchitecture.Input<CreateNewTask> {
+) : FlowDrivenArchitecture.Input<TaskCreationParameters> {
 
-    override fun invoke(value: CreateNewTask) {
+    override fun invoke(value: TaskCreationParameters) {
         coroutineScope.launch {
             tasksRepository.insert(
                 value.title,

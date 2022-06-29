@@ -1,4 +1,4 @@
-package epicarchitect.arch.io
+package epicarchitect.domain
 
 data class Task(
     val id: TaskId,

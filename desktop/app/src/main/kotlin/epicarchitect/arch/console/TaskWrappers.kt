@@ -1,8 +1,8 @@
 package epicarchitect.arch.console.io
 
-import epicarchitect.arch.io.TaskContent
-import epicarchitect.arch.io.TaskId
-import epicarchitect.arch.io.TaskTitle
+import epicarchitect.domain.TaskContent
+import epicarchitect.domain.TaskId
+import epicarchitect.domain.TaskTitle
 
 data class TaskIdWrapper(val value: Int) : TaskId
 data class TaskTitleWrapper(val value: String) : TaskTitle

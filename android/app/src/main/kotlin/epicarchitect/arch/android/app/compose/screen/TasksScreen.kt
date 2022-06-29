@@ -34,11 +34,7 @@ import epicarchitect.arch.android.app.architecture.outputAsStateBy
 import epicarchitect.arch.android.app.io.TaskContentWrapper
 import epicarchitect.arch.android.app.io.TaskTitleWrapper
 import epicarchitect.arch.android.app.io.impl
-import epicarchitect.arch.io.CreateNewTask
-import epicarchitect.arch.io.DeleteTask
-import epicarchitect.arch.io.TaskContent
-import epicarchitect.arch.io.TaskId
-import epicarchitect.arch.io.TaskTitle
+import epicarchitect.domain.*
 
 @Composable
 fun TasksScreen() {
@@ -116,7 +112,7 @@ fun LazyItemScope.CreateTaskButton() {
             .animateItemPlacement(),
         onClick = {
             App.architecture.input(
-                CreateNewTask(
+                TaskCreationParameters(
                     title = TaskTitleWrapper("Item"),
                     content = TaskContentWrapper("Content")
                 )
@@ -161,7 +157,7 @@ fun LazyItemScope.Task(taskId: TaskId) {
                     .padding(end = 12.dp, bottom = 8.dp)
                     .align(Alignment.BottomEnd),
                 onClick = {
-                    App.architecture.input(DeleteTask(taskId))
+                    App.architecture.input(TaskDeletionParameters(taskId))
                 },
                 content = {
                     Text(

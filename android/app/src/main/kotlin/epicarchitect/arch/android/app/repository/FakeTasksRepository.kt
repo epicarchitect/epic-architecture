@@ -5,10 +5,10 @@ import epicarchitect.arch.android.app.io.TaskIdWrapper
 import epicarchitect.arch.android.app.io.TaskTitleWrapper
 import epicarchitect.arch.android.app.io.TasksRepository
 import epicarchitect.arch.android.app.io.impl
-import epicarchitect.arch.io.Task
-import epicarchitect.arch.io.TaskContent
-import epicarchitect.arch.io.TaskId
-import epicarchitect.arch.io.TaskTitle
+import epicarchitect.domain.Task
+import epicarchitect.domain.TaskContent
+import epicarchitect.domain.TaskId
+import epicarchitect.domain.TaskTitle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map

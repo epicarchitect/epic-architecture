@@ -1,16 +1,15 @@
-package epicarchitect.architecture.flow
+package epicarchitect.architecture.procedure
 
 import epicarchitect.architecture.core.EpicArchitecture
-import kotlinx.coroutines.flow.Flow
 
-class FlowArchitectureBuilder {
-    val outputs = mutableListOf<FlowDrivenArchitecture.Output<*, *>>()
-    val inputs = mutableListOf<FlowDrivenArchitecture.Input<*>>()
+class IoDrivenArchitectureBuilder {
+    val outputs = mutableListOf<ProcedureDrivenArchitecture.Output<*, *>>()
+    val inputs = mutableListOf<ProcedureDrivenArchitecture.Input<*>>()
     val outputConfigs = mutableListOf<EpicArchitecture.OutputConfig>()
     val inputConfigs = mutableListOf<EpicArchitecture.InputConfig>()
 
-    inline fun <reified KEY : Any?, reified VALUE : Any?> output(crossinline process: (KEY) -> Flow<VALUE>) {
-        val output = FlowDrivenArchitecture.Output<KEY, VALUE> { process(it) }
+    inline fun <reified KEY : Any?, reified VALUE : Any?> output(crossinline process: (KEY) -> VALUE) {
+        val output = ProcedureDrivenArchitecture.Output<KEY, VALUE> { process(it) }
         outputs.add(output)
         outputConfigs.add(
             EpicArchitecture.OutputConfig(
@@ -23,7 +22,7 @@ class FlowArchitectureBuilder {
 
 
     inline fun <reified VALUE : Any?> input(crossinline process: (VALUE) -> Unit) {
-        val input = FlowDrivenArchitecture.Input<VALUE> { process(it) }
+        val input = ProcedureDrivenArchitecture.Input<VALUE> { process(it) }
         inputs.add(input)
         inputConfigs.add(
             EpicArchitecture.InputConfig(
@@ -33,7 +32,7 @@ class FlowArchitectureBuilder {
         )
     }
 
-    fun build() = FlowDrivenArchitecture(
+    fun build() = ProcedureDrivenArchitecture(
         outputs,
         inputs,
         outputConfigs,
@@ -41,4 +40,4 @@ class FlowArchitectureBuilder {
     )
 }
 
-fun FlowDrivenArchitecture(setup: FlowArchitectureBuilder.() -> Unit) = FlowArchitectureBuilder().apply(setup).build()
+fun ProcedureDrivenArchitecture(setup: IoDrivenArchitectureBuilder.() -> Unit) = IoDrivenArchitectureBuilder().apply(setup).build()
